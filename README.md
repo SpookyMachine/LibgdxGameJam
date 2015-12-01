@@ -1,0 +1,2 @@
+# LibgdxGameJam
+Preparation for libgdxGameJam
