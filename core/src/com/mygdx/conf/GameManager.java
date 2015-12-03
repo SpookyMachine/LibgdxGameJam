@@ -20,23 +20,12 @@ public class GameManager implements Disposable {
     public static final float V_HEIGHT = 15.0f;
     public static final Vector2 GRAVITY = new Vector2(0.0f, -9.8f * 4);
     public static final float STEP = 1 / 60.0f;
-    public static final short NOTHING_BIT = 0;
-    public static final short GROUND_BIT = 1;
-    public static final short MARIO_BIT = 1 << 1;
-    public static final short MARIO_HEAD_BIT = 1 << 2;
-    public static final short ENEMY_LETHAL_BIT = 1 << 3;
-    public static final short ENEMY_WEAKNESS_BIT = 1 << 4;
-    public static final short ENEMY_INTERACT_BIT = 1 << 5;
-    public static final short ITEM_BIT = 1 << 6;
-    public static final short WEAPON_BIT = 1 << 7;
-    public static final short FLAGPOLE_BIT = 1 << 8;
+
     public static final String musicPath = "audio/music/";
     public static GameManager instance;
     public static float timeScale = 1;
     private AssetManager assetManager;
-    private int score;
-    private int coins;
-    private String currentMusic = "";
+
 
     public GameManager() {
         if (instance == null) {
@@ -49,8 +38,6 @@ public class GameManager implements Disposable {
 
         loadAudio();
 
-        score = 0;
-        coins = 0;
     }
 
     public static void setTimeScale(float value) {
@@ -80,83 +67,9 @@ public class GameManager implements Disposable {
         assetManager.finishLoading();
     }
 
-    public void gameOver() {
-        clearScore();
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void clearScore() {
-        score = 0;
-    }
-
-    public void addScore(int value) {
-        score += value;
-    }
-
-    public void addCoin() {
-        addCoin(1);
-    }
-
-    public void addCoin(int value) {
-        coins += value;
-    }
-
-    public int getCoins() {
-        return coins;
-    }
-
     public AssetManager getAssetManager() {
         return assetManager;
     }
-
-    public void playMusic(String filename) {
-        playMusic(filename, true);
-    }
-
-    public void playMusic(String filename, boolean loop) {
-        if (!currentMusic.equals(filename)) {
-            stopMusic();
-            currentMusic = filename;
-        }
-
-        if (isPlayingMusic(currentMusic)) {
-            return;
-        }
-        assetManager.get(musicPath + filename, Music.class).setLooping(loop);
-        assetManager.get(musicPath + filename, Music.class).play();
-    }
-
-    public boolean isPlayingMusic() {
-        return isPlayingMusic(currentMusic);
-    }
-
-    public void pauseMusic() {
-        if (currentMusic.length() > 0) {
-            assetManager.get(musicPath + currentMusic, Music.class).pause();
-        }
-    }
-
-    public void resumeMusic() {
-        if (currentMusic.length() > 0) {
-            if (!isPlayingMusic(currentMusic)) {
-                playMusic(currentMusic);
-            }
-        }
-    }
-
-    public void stopMusic() {
-        if (currentMusic.length() > 0) {
-            assetManager.get(musicPath + currentMusic, Music.class).stop();
-        }
-    }
-
-    public boolean isPlayingMusic(String filename) {
-        return assetManager.get(musicPath + filename, Music.class).isPlaying();
-    }
-
 
     @Override
     public void dispose() {
