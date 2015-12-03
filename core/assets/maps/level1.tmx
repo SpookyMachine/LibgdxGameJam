@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="212" height="15" tilewidth="16" tileheight="16" nextobjectid="9">
+ <tileset firstgid="1" name="tileset_gutter" tilewidth="17" tileheight="17" spacing="1" margin="1" tilecount="924">
+  <image source="tileset_gutter.png" trans="ff00ff" width="594" height="504"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="212" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENACAMBLGPGCz7b5UhQCAhF+6vua6kAQAAAAAAAAAAgKtW3jfATzwFZ3kK9g3vVxp3
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1">
+  <object id="2" x="16" y="148" width="128" height="54.6667"/>
+  <object id="3" x="310.667" y="109.333"/>
+  <object id="4" x="32" y="109.333" width="24" height="17.3333"/>
+  <object id="5" x="26.6667" y="217.333" width="25.3333" height="16">
+   <ellipse/>
+  </object>
+  <object id="6" x="18.6667" y="70.6667">
+   <polygon points="0,0 48,-28 57.3333,30.6667"/>
+  </object>
+  <object id="7" x="106.667" y="81.3333">
+   <polyline points="0,0 -5.33333,53.3333 58.6667,48 65.3333,-1.33333 -0.0833333,-0.0833333"/>
+  </object>
+ </objectgroup>
+</map>
