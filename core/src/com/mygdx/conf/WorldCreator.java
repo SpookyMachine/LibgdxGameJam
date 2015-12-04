@@ -85,10 +85,11 @@ public class WorldCreator {
             if (object instanceof RectangleMapObject) {
                 Shape shape;
                 shape = getRectangle((RectangleMapObject) object);
+
                 //Looks into object properties map for body type and sets it
                 // Dynamic or static for now
                 if(object.getProperties().containsKey("bodyType")){
-                    switch (object.getProperties().get("bodyType", String.class)){
+                    /*switch (object.getProperties().get("bodyType", String.class)){
                         case "dynamic":
                             bdef.type = BodyDef.BodyType.StaticBody;
                             break;
@@ -97,6 +98,15 @@ public class WorldCreator {
                         default:
                             bdef.type = BodyDef.BodyType.StaticBody;
                             break;
+                    }*/
+                    //dno it seems i just cant run it in java 7
+                    // and for random fact we cant use java 8 it will brake android ios and html projects
+
+                    if(object.getProperties().get("bodyType", String.class).equals("dynamic")){
+                        bdef.type = BodyDef.BodyType.DynamicBody;
+                    }
+                    if(object.getProperties().get("bodyType", String.class).equals("static")){
+                        bdef.type = BodyDef.BodyType.StaticBody;
                     }
                 }
 

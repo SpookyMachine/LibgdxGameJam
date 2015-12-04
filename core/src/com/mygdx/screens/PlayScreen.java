@@ -11,6 +11,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -82,8 +84,7 @@ public class PlayScreen implements Screen {
         creator.generateLayer(world, tiledMap, TiledMapLayer.BRICKS, "");
 
         box2DDebugRenderer = new Box2DDebugRenderer();
-        renderB2DDebug = false;
-
+        renderB2DDebug = true;
 
     }
 
@@ -135,9 +136,9 @@ public class PlayScreen implements Screen {
         // Box2D world step
         accumulator += delta;
         if (accumulator > step) {
-            world.step(step, 8, 3);
             accumulator -= step;
         }
+        world.step(step, 8, 3);
 
 
         // camera control
