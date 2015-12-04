@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.conf.GameManager;
 import com.mygdx.conf.WorldContactListener;
+import com.mygdx.conf.WorldCreator;
+import com.mygdx.enums.TiledMapLayer;
 import com.mygdx.game.LibgdxGameJamTestGame;
 
 
@@ -75,6 +77,13 @@ public class PlayScreen implements Screen {
 
         // create world from TmxTiledMap
 //        WorldCreator worldCreator = new WorldCreator(this, tiledMap);
+
+        WorldCreator creator = new WorldCreator();
+        creator.generateLayer(world,tiledMap, TiledMapLayer.BRICKS, "");
+
+        box2DDebugRenderer = new Box2DDebugRenderer();
+        renderB2DDebug = false;
+
 
     }
 

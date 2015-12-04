@@ -8,7 +8,7 @@
    eJzt07ENACAMBLGPGCz7b5UhQCAhF+6vua6kAQAAAAAAAAAAgKtW3jfATzwFZ3kK9g3vVxp3
   </data>
  </layer>
- <objectgroup name="Object Layer 1">
+ <objectgroup name="Bricks">
   <object id="2" x="16" y="148" width="128" height="54.6667"/>
   <object id="3" x="310.667" y="109.333"/>
   <object id="4" x="32" y="109.333" width="24" height="17.3333"/>
