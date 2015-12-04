@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="212" height="15" tilewidth="16" tileheight="16" nextobjectid="9">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="212" height="15" tilewidth="16" tileheight="16" nextobjectid="28">
  <tileset firstgid="1" name="tileset_gutter" tilewidth="17" tileheight="17" spacing="1" margin="1" tilecount="924">
   <image source="tileset_gutter.png" trans="ff00ff" width="594" height="504"/>
  </tileset>
  <layer name="Tile Layer 1" width="212" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt07ENACAMBLGPGCz7b5UhQCAhF+6vua6kAQAAAAAAAAAAgKtW3jfATzwFZ3kK9g3vVxp3
+   eJzt0zENwDAQBMF3Yl7mzypyEQYnXTPFANhiz5o5AAAAAAAAELInq90DTc9ktXugyU+Q4yfIef0EMfeB5FPtHmj6P0g91e6Bpg8Du/li
   </data>
  </layer>
- <objectgroup name="Bricks">
+ <objectgroup name="TestLayer" visible="0">
   <object id="2" x="16" y="148" width="128" height="54.6667"/>
   <object id="3" x="310.667" y="109.333"/>
   <object id="4" x="32" y="109.333" width="24" height="17.3333"/>
@@ -20,6 +20,21 @@
   </object>
   <object id="7" x="106.667" y="81.3333">
    <polyline points="0,0 -5.33333,53.3333 58.6667,48 65.3333,-1.33333 -0.0833333,-0.0833333"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Bricks">
+  <object id="23" x="1" y="128.667" width="319" height="13.6667"/>
+  <object id="24" x="48" y="49" width="16" height="14">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="test" value="1"/>
+   </properties>
+  </object>
+  <object id="25" x="96.6667" y="49" width="15" height="13.6667">
+   <properties>
+    <property name="bodyType" value="dynamic"/>
+    <property name="test" value="2"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

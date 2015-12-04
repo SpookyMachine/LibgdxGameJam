@@ -79,7 +79,7 @@ public class PlayScreen implements Screen {
 //        WorldCreator worldCreator = new WorldCreator(this, tiledMap);
 
         WorldCreator creator = new WorldCreator();
-        creator.generateLayer(world,tiledMap, TiledMapLayer.BRICKS, "");
+        creator.generateLayer(world, tiledMap, TiledMapLayer.BRICKS, "");
 
         box2DDebugRenderer = new Box2DDebugRenderer();
         renderB2DDebug = false;

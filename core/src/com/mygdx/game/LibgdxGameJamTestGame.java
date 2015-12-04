@@ -6,32 +6,32 @@ import com.mygdx.conf.GameManager;
 import com.mygdx.screens.PlayScreen;
 
 public class LibgdxGameJamTestGame extends Game {
-	public SpriteBatch batch;
+    public SpriteBatch batch;
 
-	private GameManager gameManager;
+    private GameManager gameManager;
 
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
 
-		if (GameManager.instance != null) {
-			gameManager = GameManager.instance;
-		} else {
-			gameManager = new GameManager();
-		}
+        if (GameManager.instance != null) {
+            gameManager = GameManager.instance;
+        } else {
+            gameManager = new GameManager();
+        }
 
-		setScreen(new PlayScreen(this));
-	}
+        setScreen(new PlayScreen(this));
+    }
 
-	@Override
-	public void render () {
-		super.render();
-	}
+    @Override
+    public void render() {
+        super.render();
+    }
 
 
-	@Override
-	public void dispose() {
-		super.dispose();
-		gameManager.dispose();
-	}
+    @Override
+    public void dispose() {
+        super.dispose();
+        gameManager.dispose();
+    }
 }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.entities.Brick;
 import com.mygdx.enums.TiledMapLayer;
 
 /**
@@ -21,64 +22,6 @@ public class WorldCreator {
     private Body body;
     private BodyDef bdef = new BodyDef();
     private FixtureDef fdef = new FixtureDef();
-
-    /**
-     * Adds box2d objects to world from @layerName and adds userData to all objects from layer
-     *
-     * @param world
-     * @param map
-     * @param layerName
-     * @param userData
-     */
-    public void generateLayer(World world, TiledMap map, TiledMapLayer layerName, String userData) {
-        for (MapObject object : map.getLayers().get(layerName.toString()).getObjects()) {
-            if (object instanceof RectangleMapObject) {
-                Shape shape;
-                shape = getRectangle((RectangleMapObject) object);
-                bdef.type = BodyDef.BodyType.StaticBody;
-
-                fdef.friction = 0;
-                fdef.isSensor = false;
-
-                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
-            }
-            // This is only for testing purposes
-            if (object instanceof PolygonMapObject) {
-                Shape shape;
-                shape = getPolygon((PolygonMapObject) object);
-                bdef.type = BodyDef.BodyType.StaticBody;
-
-                fdef.friction = 0;
-                fdef.isSensor = false;
-
-                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
-            }
-            if (object instanceof PolylineMapObject) {
-                Shape shape;
-                shape = getPolyline((PolylineMapObject) object);
-                bdef.type = BodyDef.BodyType.StaticBody;
-
-                fdef.friction = 0;
-                fdef.isSensor = false;
-
-                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
-            }
-            if (object instanceof CircleMapObject) {
-                Shape shape;
-                shape = getCircle((CircleMapObject) object);
-                bdef.type = BodyDef.BodyType.StaticBody;
-
-                fdef.friction = 0;
-                fdef.isSensor = false;
-
-                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
-            } else {
-                continue;
-            }
-
-
-        }
-    }
 
     //Retrieving polygon shape from map object
     private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
@@ -126,5 +69,83 @@ public class WorldCreator {
         ChainShape chain = new ChainShape();
         chain.createChain(worldVertices);
         return chain;
+    }
+
+    /**
+     * Adds box2d objects to world from @layerName and adds userData to all objects from layer
+     *
+     * @param world
+     * @param map
+     * @param layerName
+     * @param userData
+     */
+    public void generateLayer(World world, TiledMap map, TiledMapLayer layerName, String userData) {
+
+        for (MapObject object : map.getLayers().get(layerName.toString()).getObjects()) {
+            if (object instanceof RectangleMapObject) {
+                Shape shape;
+                shape = getRectangle((RectangleMapObject) object);
+                //Looks into object properties map for body type and sets it
+                // Dynamic or static for now
+                if(object.getProperties().containsKey("bodyType")){
+                    switch (object.getProperties().get("bodyType", String.class)){
+                        case "dynamic":
+                            bdef.type = BodyDef.BodyType.StaticBody;
+                            break;
+                        //default and static is static woot
+                        case "static":
+                        default:
+                            bdef.type = BodyDef.BodyType.StaticBody;
+                            break;
+                    }
+                }
+
+                fdef.friction = 0;
+                fdef.isSensor = false;
+
+                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
+                // TODO refactor dis stuff
+                switch (layerName) {
+                    case BRICKS:
+                        new Brick(object.getProperties());
+
+                }
+            }
+
+            // Not really necessary all these these added them only for testing purposes
+            if (object instanceof PolygonMapObject) {
+                Shape shape;
+                shape = getPolygon((PolygonMapObject) object);
+                bdef.type = BodyDef.BodyType.StaticBody;
+
+                fdef.friction = 0;
+                fdef.isSensor = false;
+
+                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
+            }
+            if (object instanceof PolylineMapObject) {
+                Shape shape;
+                shape = getPolyline((PolylineMapObject) object);
+                bdef.type = BodyDef.BodyType.StaticBody;
+
+                fdef.friction = 0;
+                fdef.isSensor = false;
+
+                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
+            }
+            if (object instanceof CircleMapObject) {
+                Shape shape;
+                shape = getCircle((CircleMapObject) object);
+                bdef.type = BodyDef.BodyType.StaticBody;
+
+                fdef.friction = 0;
+                fdef.isSensor = false;
+
+                world.createBody(bdef).createFixture(shape, 1).setUserData(userData);
+            } else {
+                continue;
+            }
+
+        }
     }
 }

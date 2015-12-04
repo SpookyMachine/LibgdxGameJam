@@ -9,8 +9,7 @@ public enum TiledMapLayer {
     COINS("Coins"),
     PIPES("Pipes"),
     BRICKS("Bricks"),
-    GOOMBAS("Goombas")
-    ;
+    GOOMBAS("Goombas");
 
     private final String text;
 
