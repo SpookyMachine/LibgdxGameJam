@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.conf.GameManager;
+import com.mygdx.screens.InventoryScreen;
 import com.mygdx.screens.PlayScreen;
 
 public class LibgdxGameJamTestGame extends Game {
@@ -20,7 +21,7 @@ public class LibgdxGameJamTestGame extends Game {
             gameManager = new GameManager();
         }
 
-        setScreen(new PlayScreen(this));
+        setScreen(new InventoryScreen());
     }
 
     @Override
