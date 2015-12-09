@@ -26,4 +26,7 @@ public class Constants {
     public static float RUNNER_DENSITY = 0.5f;
     public static final Vector2 RUNNER_JUMPING_LINEAR_IMPULSE = new Vector2(0, 13f);
 
+    public static final float RUNNER_DODGE_X = 2f;
+    public static final float RUNNER_DODGE_Y = 1.5f;
+
 }

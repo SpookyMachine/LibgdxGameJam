@@ -8,6 +8,7 @@ import com.mygdx.game.box2d.RunnerUserData;
  */
 public class Runner extends BaseActor {
     private boolean jumping;
+    private boolean dodging;
 
     public Runner(Body body) {
         super(body);
@@ -18,9 +19,10 @@ public class Runner extends BaseActor {
         return (RunnerUserData) userData;
     }
 
+
     public void jump() {
 
-        if (!jumping) {
+        if (!(jumping || dodging)) {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
             jumping = true;
         }
@@ -29,5 +31,21 @@ public class Runner extends BaseActor {
 
     public void landed() {
         jumping = false;
+    }
+
+    public void dodge() {
+        if (!jumping) {
+            body.setTransform(getUserData().getDodgePosition(), getUserData().getDodgeAngle());
+            dodging = true;
+        }
+    }
+
+    public void stopDodge() {
+        dodging = false;
+        body.setTransform(getUserData().getRunningPosition(), 0f);
+    }
+
+    public boolean isDodging() {
+        return dodging;
     }
 }
