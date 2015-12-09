@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.mygdx.game.Stages.GameStage;
 
 /**
  * Created by mike on 12/9/15.
@@ -12,6 +13,7 @@ public class GameScreen implements Screen {
     private GameStage stage;
 
     public GameScreen() {
+        // This part brakes for me
         stage = new GameStage();
     }
 
@@ -20,8 +22,8 @@ public class GameScreen implements Screen {
         //Clear the screen
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        //Update the stage
+//
+//        //Update the stage
         stage.draw();
         stage.act(delta);
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.Entities.Ground;
 import com.mygdx.game.Entities.Runner;
+import com.mygdx.game.utils.BodyUtils;
 import com.mygdx.game.utils.WorldUtils;
 
 /**
