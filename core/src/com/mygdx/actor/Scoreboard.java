@@ -3,6 +3,8 @@ package com.mygdx.actor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -13,6 +15,14 @@ public class Scoreboard extends Actor {
 
     private ShapeRenderer renderer = new ShapeRenderer();
 
+    private BitmapFont font;
+
+    private int score;
+
+    public Scoreboard() {
+        font = createFont(14);
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.end();
@@ -20,6 +30,8 @@ public class Scoreboard extends Actor {
         drawArea();
 
         batch.begin();
+
+        drawScore(batch);
     }
 
     @Override
@@ -38,4 +50,30 @@ public class Scoreboard extends Actor {
                 Color.BLUE, Color.BLUE, Color.BLUE);
         renderer.end();
     }
+
+    /**
+     * Draw score numbers.
+     * @param batch batch
+     */
+    private void drawScore(Batch batch) {
+        font.draw(batch, String.valueOf(score), 5, Gdx.graphics.getHeight() - 20);
+    }
+
+    private BitmapFont createFont(int size) {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/OpenSans-Regular.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = size;
+        BitmapFont font = generator.generateFont(parameter);
+        generator.dispose();
+        return font;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
 }
