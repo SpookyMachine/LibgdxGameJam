@@ -1,20 +1,25 @@
 package com.mygdx.game.Stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.Entities.Ground;
 import com.mygdx.game.Entities.Runner;
 import com.mygdx.game.utils.BodyUtils;
+import com.mygdx.game.utils.InputListenerForStage;
 import com.mygdx.game.utils.WorldUtils;
 
 /**
  * Created by mike on 12/9/15.
  */
-public class GameStage extends Stage implements ContactListener {
+public class GameStage extends Stage implements ContactListener, InputProcessor {
 
     // This will be our viewport measurements while working with the debug renderer
     private static final int VIEWPORT_WIDTH = 20;
@@ -41,6 +46,7 @@ public class GameStage extends Stage implements ContactListener {
         setupCamera();
         setupTouchControlAreas();
         renderer = new Box2DDebugRenderer();
+        addListener(new InputListenerForStage());
     }
 
     private void setupTouchControlAreas() {
@@ -64,6 +70,13 @@ public class GameStage extends Stage implements ContactListener {
 
     private void setUpRunner() {
         runner = new Runner(WorldUtils.createRunner(world));
+        runner.addListener(new InputListener(){
+            @Override
+            public boolean keyDown(InputEvent event, int keyCode) {
+                System.out.println("Key Down");
+                return true;
+            }
+        });
         addActor(runner);
     }
 
@@ -163,4 +176,6 @@ public class GameStage extends Stage implements ContactListener {
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
     }
+
+
 }

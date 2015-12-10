@@ -15,6 +15,7 @@ public class GameScreen implements Screen {
     public GameScreen() {
         // This part brakes for me
         stage = new GameStage();
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
