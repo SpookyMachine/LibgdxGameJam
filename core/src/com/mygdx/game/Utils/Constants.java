@@ -10,5 +10,5 @@ public class Constants {
     /**
      * New tree part appears every n seconds.
      */
-    public static final float TREE_PART_APPEAR_TIME = 5f;
+    public static final float TREE_PART_APPEAR_TIME = 10f;
 }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.actor.part.TreePart;
@@ -45,7 +46,7 @@ public class PlayScreen implements Screen {
 
 
         // Init stage
-        stage = new Stage(cameraViewPort);
+        stage = new Stage(new ScreenViewport());
         initializeActors();
         Gdx.input.setInputProcessor(stage);
     }

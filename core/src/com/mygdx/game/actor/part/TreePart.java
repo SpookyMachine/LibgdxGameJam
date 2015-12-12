@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Utils.Constants;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,16 +26,17 @@ public class TreePart extends AbstractPart {
 
     private float time;
 
-    private MoveByAction mba;
+    private MoveByAction mba = new MoveByAction();
 
     public TreePart() {
         setName("TreePart");
-        setSize(40f, 40f);
+        setSize(20f, 20f);
+
         setBounds(getX(), getY(), getWidth(), getHeight());
 
         createMovement();
 
-        this.addAction(mba);
+        addMouseClickEvent();
     }
 
     /**
@@ -57,8 +62,8 @@ public class TreePart extends AbstractPart {
         time += delta;
         if (time > Constants.TREE_PART_APPEAR_TIME) {
             setX(ThreadLocalRandom.current().nextInt(0, (int) (Gdx.graphics.getWidth() - getWidth())));
+            mba.reset();
             createMovement();
-            this.addAction(mba);
             time = 0;
         }
         super.act(delta);
@@ -76,10 +81,22 @@ public class TreePart extends AbstractPart {
     }
 
     private void createMovement() {
-        mba = new MoveByAction();
         // set movement from top to bottom
         mba.setAmountY(Gdx.graphics.getHeight() + getHeight());
         mba.setDuration(SPEED_FAST);
         mba.setReverse(true); // from top, to bot
+        this.addAction(mba);
     }
+
+    private void addMouseClickEvent() {
+        addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("--MOUSE--", "clicked: x=" + x + ", y=" + y);
+            }
+
+        });
+    }
+
+
 }
