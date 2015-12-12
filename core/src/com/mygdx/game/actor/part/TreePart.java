@@ -10,9 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.actor.Tree;
 
 import java.util.concurrent.ThreadLocalRandom;
-
 
 /**
  * Created by Gt
@@ -21,16 +21,13 @@ public class TreePart extends AbstractPart {
 
     private ShapeRenderer renderer = new ShapeRenderer();
 
-    // additional color of tree part
-    private static final Color COLOR_DARK_GREEN = new Color(0, 0.4f, 0, 1);
-
     private float time;
 
     private MoveByAction mba = new MoveByAction();
 
     public TreePart() {
         setName("TreePart");
-        setSize(20f, 20f);
+        setSize(20f, 20f); // TODO: iskelti is cia ir Tree
 
         setBounds(getX(), getY(), getWidth(), getHeight());
 
@@ -61,10 +58,7 @@ public class TreePart extends AbstractPart {
     public void act(float delta) {
         time += delta;
         if (time > Constants.TREE_PART_APPEAR_TIME) {
-            setX(ThreadLocalRandom.current().nextInt(0, (int) (Gdx.graphics.getWidth() - getWidth())));
-            mba.reset();
-            createMovement();
-            time = 0;
+            resetPart();
         }
         super.act(delta);
     }
@@ -76,7 +70,7 @@ public class TreePart extends AbstractPart {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         renderer.rect(getX(), getY(),
                 getWidth(), getHeight(),
-                COLOR_DARK_GREEN, Color.GREEN, Color.GREEN, COLOR_DARK_GREEN);
+                Tree.COLOR_DARK_GREEN, Color.GREEN, Color.GREEN, Tree.COLOR_DARK_GREEN);
         renderer.end();
     }
 
@@ -93,10 +87,17 @@ public class TreePart extends AbstractPart {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("--MOUSE--", "clicked: x=" + x + ", y=" + y);
+                Tree.addPart();
             }
 
         });
     }
 
+    private void resetPart() {
+        setX(ThreadLocalRandom.current().nextInt(0, (int) (Gdx.graphics.getWidth() - getWidth())));
+        mba.reset();
+        createMovement();
+        time = 0;
+    }
 
 }

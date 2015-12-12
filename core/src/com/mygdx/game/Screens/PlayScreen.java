@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.actor.Tree;
 import com.mygdx.game.actor.part.TreePart;
 
 /**
@@ -93,6 +94,7 @@ public class PlayScreen implements Screen {
      * Initialize and add all stage actors.
      */
     private void initializeActors() {
+        initTree();
         initFallingParts();
     }
 
@@ -101,5 +103,12 @@ public class PlayScreen implements Screen {
      */
     private void initFallingParts() {
         stage.addActor(new TreePart());
+    }
+
+    /**
+     * Initialize tree.
+     */
+    private void initTree() {
+        stage.addActor(new Tree());
     }
 }
