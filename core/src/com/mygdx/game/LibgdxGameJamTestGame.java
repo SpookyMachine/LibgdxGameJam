@@ -9,8 +9,8 @@ public class LibgdxGameJamTestGame extends Game {
 	@Override
 	public void create () {
 
-    new PlayScreen();
-//       setScreen(new PlayScreen());
+//    new PlayScreen();
+       setScreen(new PlayScreen());
 	}
 
 	@Override
