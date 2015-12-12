@@ -13,6 +13,8 @@ public class TreePart extends Actor {
 
     private ShapeRenderer renderer = new ShapeRenderer();
 
+    private static final Color COLOR_DARK_GREEN = new Color(0, 0.4f, 0, 1);
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.end();
@@ -32,9 +34,9 @@ public class TreePart extends Actor {
      */
     private void drawArea(float x) {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-//        renderer.rect(x, (float) Gdx.graphics.getHeight(),
-//                40f, 40f,
-//                Color.BLUE, Color.BLUE, Color.BLUE);
+        renderer.rect(x, 0,
+                40f, 40f,
+                COLOR_DARK_GREEN, Color.GREEN, Color.GREEN, COLOR_DARK_GREEN);
         renderer.end();
     }
 
