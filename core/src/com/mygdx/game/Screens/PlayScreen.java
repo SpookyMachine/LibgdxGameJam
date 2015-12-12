@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.actor.TreePart;
 
 /**
  * Created by mike on 12/12/15.
@@ -26,10 +28,13 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
+    // the stage
+    private Stage stage;
+
     @Override
     public void show() {
 
-        // Init cammera stuff
+        // Init camera stuff
         camera = new OrthographicCamera();
         cameraViewPort = new FitViewport(V_WIDTH / Constants.PPM, V_HEIGHT / Constants.PPM, camera);
 
@@ -37,17 +42,25 @@ public class PlayScreen implements Screen {
         // Init box2d Stuff
         world = new World(new Vector2(0,-10f), true);
         b2dr = new Box2DDebugRenderer();
+
+
+        // Init stage
+        stage = new Stage(cameraViewPort);
+        initializeActors();
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //Box2D debug
         b2dr.render(world, camera.combined);
 
 
+        // draw stage
+        stage.act(Gdx.graphics.getDeltaTime()); // before draw - update every actor
+        stage.draw();
     }
 
     @Override
@@ -73,5 +86,19 @@ public class PlayScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    /**
+     * Initialize and add all stage actors.
+     */
+    private void initializeActors() {
+        initFallingParts();
+    }
+
+    /**
+     * Initialize falling good parts.
+     */
+    private void initFallingParts() {
+        stage.addActor(new TreePart());
     }
 }

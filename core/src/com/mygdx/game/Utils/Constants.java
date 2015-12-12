@@ -6,4 +6,9 @@ package com.mygdx.game.Utils;
 public class Constants {
 
     public static final float PPM = 16f;
+
+    /**
+     * New tree part appears every n seconds.
+     */
+    public static final float TREE_PART_APPEAR_TIME = 5f;
 }
