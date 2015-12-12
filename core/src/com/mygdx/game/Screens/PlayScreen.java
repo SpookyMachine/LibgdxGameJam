@@ -29,6 +29,7 @@ public class PlayScreen implements Screen {
     @Override
     public void show() {
 
+
         // Init cammera stuff
         camera = new OrthographicCamera();
         cameraViewPort = new FitViewport(V_WIDTH / Constants.PPM, V_HEIGHT / Constants.PPM, camera);
@@ -46,7 +47,6 @@ public class PlayScreen implements Screen {
 
         //Box2D debug
         b2dr.render(world, camera.combined);
-
 
     }
 
