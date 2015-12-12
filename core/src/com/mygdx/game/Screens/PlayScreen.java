@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Utils.Constants;
-import com.mygdx.game.actor.TreePart;
+import com.mygdx.game.actor.part.TreePart;
 
 /**
  * Created by mike on 12/12/15.

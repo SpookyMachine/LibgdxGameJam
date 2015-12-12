@@ -1,4 +1,4 @@
-package com.mygdx.game.actor;
+package com.mygdx.game.actor.part;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -34,6 +34,10 @@ public class TreePart extends AbstractPart {
         this.addAction(mba);
     }
 
+    /**
+     * Creates part with initial x position.
+     * @param initialX x position
+     */
     public TreePart(float initialX) {
         this();
         setX(initialX);
