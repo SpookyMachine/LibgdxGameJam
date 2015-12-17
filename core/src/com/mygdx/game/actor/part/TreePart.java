@@ -25,9 +25,17 @@ public class TreePart extends AbstractPart {
 
     private MoveByAction mba = new MoveByAction();
 
+    public static final float TREE_PART_WIDTH = 20f;
+    public static final float TREE_PART_HEIGHT = 20f;
+
+    /**
+     * New tree part appears every n seconds.
+     */
+    public static final float TREE_PART_APPEAR_TIME = 10f;
+
     public TreePart() {
         setName("TreePart");
-        setSize(20f, 20f); // TODO: iskelti is cia ir Tree
+        setSize(TREE_PART_WIDTH, TREE_PART_HEIGHT);
 
         setBounds(getX(), getY(), getWidth(), getHeight());
 
@@ -38,6 +46,7 @@ public class TreePart extends AbstractPart {
 
     /**
      * Creates part with initial x position.
+     *
      * @param initialX x position
      */
     public TreePart(float initialX) {
@@ -57,7 +66,7 @@ public class TreePart extends AbstractPart {
     @Override
     public void act(float delta) {
         time += delta;
-        if (time > Constants.TREE_PART_APPEAR_TIME) {
+        if (time > TREE_PART_APPEAR_TIME) {
             resetPart();
         }
         super.act(delta);

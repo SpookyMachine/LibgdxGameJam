@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.actor.part.TreePart;
 
 /**
  * Created by Gt
@@ -33,12 +34,12 @@ public class Tree extends Actor {
     }
 
     /**
-     * Draw single stem part (Need to end batch before this method and begin after).
+     * Draw stem by number of parts (Need to end batch before this method and begin after).
      */
     private void drawArea() {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         renderer.rect(getStage().getWidth() / 2, 0,
-                20, partsNumber * 20,
+                TreePart.TREE_PART_WIDTH, partsNumber * TreePart.TREE_PART_HEIGHT,
                 COLOR_DARK_GREEN, Color.GREEN, Color.GREEN, COLOR_DARK_GREEN);
         renderer.end();
     }
