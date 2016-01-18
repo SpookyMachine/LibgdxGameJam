@@ -7,6 +7,7 @@ import com.mygdx.game.LibgdxGameJamTestGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title  = "Sammy the snake";
 		new LwjglApplication(new LibgdxGameJamTestGame(), config);
 	}
 }

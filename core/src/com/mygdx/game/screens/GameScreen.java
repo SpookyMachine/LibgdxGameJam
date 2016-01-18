@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,24 +12,93 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Created by mike on 1/18/16.
  */
 public class GameScreen extends ScreenAdapter {
-    private SpriteBatch batch;
 
-    public GameScreen() {
-        super();
+    private static final float MOVE_TIME = 1f;
+    private static final int SNAKE_MOVEMENT = 32;
+
+    private static final int RIGHT = 0;
+    private static final int LEFT = 1;
+    private static final int UP = 2;
+    private static final int DOWN = 3;
+
+
+
+    private float timer = MOVE_TIME;
+    private int snakeX = 0, snakeY = 0;
+    private int snakeDirection = RIGHT;
+
+    private SpriteBatch batch;
+    private Texture snakeHead;
+
+
+
+    @Override
+    public void show() {
         batch = new SpriteBatch();
+        snakeHead = new Texture(Gdx.files.internal("snakehead.png"));
     }
 
     @Override
     public void render(float delta) {
-
-    }
-
-    @Override
-    public void show() {
+        queryInput();
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        timer -= delta;
+        if(timer <=0 ){
+            timer = MOVE_TIME;
+        moveSnake();
+        }
+
+        checkForOutOfBounds();
         batch.begin();
-        //Our rending code will live here!
+        batch.draw(snakeHead, snakeX, snakeY );
         batch.end();
     }
+
+    private void checkForOutOfBounds(){
+        if (snakeX >= Gdx.graphics.getWidth()) {
+            snakeX = 0; }
+        if (snakeX < 0) {
+            snakeX = Gdx.graphics.getWidth() - SNAKE_MOVEMENT;
+        }
+        if (snakeY >= Gdx.graphics.getHeight()) {
+            snakeY = 0; }
+        if (snakeY < 0) {
+            snakeY = Gdx.graphics.getHeight() - SNAKE_MOVEMENT;
+        }
+    }
+
+    private void moveSnake(){
+        switch (snakeDirection){
+            case RIGHT: {
+                snakeX += SNAKE_MOVEMENT;
+                return;
+            }
+            case LEFT: {
+                snakeX -= SNAKE_MOVEMENT;
+                return;
+            }
+            case UP: {
+                snakeY += SNAKE_MOVEMENT;
+                return;
+            }
+            case DOWN: {
+                snakeY -= SNAKE_MOVEMENT;
+                return;
+            }
+        }
+    }
+
+    private void queryInput(){
+        boolean lPressed = Gdx.input.isKeyPressed(Input.Keys.LEFT);
+        boolean rPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
+        boolean uPressed = Gdx.input.isKeyPressed(Input.Keys.UP);
+        boolean dPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
+        if (lPressed) snakeDirection = LEFT;
+        if (rPressed) snakeDirection = RIGHT;
+        if (uPressed) snakeDirection = UP;
+        if (dPressed) snakeDirection = DOWN;
+    }
+
 }
