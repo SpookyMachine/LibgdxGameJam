@@ -54,7 +54,7 @@ public class GameScreen extends ScreenAdapter {
     private boolean directionSet = false;
     private BitmapFont bitmapFont;
     private GlyphLayout layout;
-    private String GAME_OVER_TEXT = "GAME OVER!!";
+    private String GAME_OVER_TEXT = "GAME OVER!! Tap space for restart!";
 
 
     @Override
@@ -81,7 +81,7 @@ public class GameScreen extends ScreenAdapter {
             }
             break;
             case GAME_OVER: {
-
+                checkForRestart();
             }
         }
 
@@ -256,6 +256,23 @@ public class GameScreen extends ScreenAdapter {
             if (bodyPart.x == snakeX && bodyPart.y == snakeY)
                 state = STATE.GAME_OVER;
         }
+    }
+
+    private void checkForRestart(){
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) doRestart();
+    }
+
+    private void doRestart() {
+        state = STATE.PLAYING;
+        bodyParts.clear();
+        snakeDirection = RIGHT;
+        directionSet = false;
+        timer = MOVE_TIME;
+        snakeX = 0;
+        snakeY = 0;
+        snakeXBeforeUpdate = 0;
+        snakeYBeforeUpdate = 0;
+        appleAvailable = false;
     }
 
     private enum STATE {
